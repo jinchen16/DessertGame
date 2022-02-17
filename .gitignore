@@ -1,0 +1,59 @@
+builds/
+SRC_DessertGame/Library/
+SRC_DessertGame/Temp/
+SRC_DessertGame/.vscode/
+LibraryIOS
+LibraryANDROID
+SRC_DessertGame/.vs/
+SRC_DessertGame/.vscode/
+SRC_DessertGame/Assets/UnityVS.meta
+SRC_DessertGame/Assets/UnityVS/*
+SRC_DessertGame/Assets/VSCode.meta
+SRC_DessertGame/Assets/VSCode/*
+SRC_DessertGame/Assets/Editor/AutoSaves/*
+SRC_DessertGame/Assets/StreamingAssets/build_info.txt
+
+# Unity generated
+Obj/
+UnityGenerated/
+# Visual Studio / MonoDevelop / Xamarin generated
+ExportedObj/
+*.svd
+*.userprefs
+*.csproj
+*.pidb
+*.suo
+*.sln
+*.user
+*.unityproj
+*.booproj
+# OS generated
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Icon?
+ehthumbs.db
+Thumbs.db
+SRC_DessertGame/QCAR/somedata16
+SRC_DessertGame/Assets/Cleo&Cuquin/TextLocalization/Scripts/Editor.meta
+SRC_DessertGame/Assets/Cleo&Cuquin/Sorting/Materials.meta
+SRC_DessertGame/Assets/Cleo&Cuquin/AudioLocalization/Editor.meta
+SRC_DessertGame/Assets/Cleo&Cuquin/3DShapes/Scripts/Main Game/ToyAssemblyManagerBase.cs.meta
+SRC_DessertGame/Assets/Cleo&Cuquin/3DShapes/Prefabs/Toy Assembly Figures.meta
+SRC_DessertGame/Assets/Cleo&Cuquin/TextLocalization/Scripts.meta
+SRC_DessertGame/Assets/Cleo&Cuquin/AudioLocalization.meta
+SRC_DessertGame/Assets/Cleo&Cuquin/TextLocalization.meta
+SRC_DessertGame/Assets/Plugins/x86_64.meta
+SRC_DessertGame/Assets/Plugins/x86.meta
+SRC_DessertGame/Assets/Plugins/iOS.meta
+SRC_DessertGame/Assets/Plugins/EasyARUnity.bundle/Contents/MacOS.meta
+SRC_DessertGame/Assets/Plugins/EasyARUnity.bundle/Contents.meta
+SRC_DessertGame/Assets/Plugins/EasyARUnity.bundle.meta
+SRC_DessertGame/Assets/Plugins/Android/libs/armeabi-v7a.meta
+SRC_DessertGame/Assets/Plugins/Android/libs.meta
+SRC_DessertGame/Assets/Plugins/Android.meta
+SRC_DessertGame/Assets/Cleo&Cuquin/_General Resources/Localization/TextLocalization/Prefabs/LocalizationManager.prefab.orig.meta
+SRC_DessertGame/Assets/Cleo&Cuquin/3DShapes/Videos/*.meta
+SRC_DessertGame/AssetBundles/
