@@ -41,7 +41,6 @@
       "dependencies": {},
       "url": "https://packages.unity.com"
     },
-<<<<<<< HEAD
     "com.unity.inputsystem": {
       "version": "1.2.0",
       "depth": 0,
@@ -58,8 +57,6 @@
       "dependencies": {},
       "url": "https://packages.unity.com"
     },
-=======
->>>>>>> 00b5332f7fab94807138449f183610cd31720d5c
     "com.unity.services.core": {
       "version": "1.0.1",
       "depth": 1,
