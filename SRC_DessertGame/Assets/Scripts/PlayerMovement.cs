@@ -7,7 +7,7 @@ public class PlayerMovement : MonoBehaviour
 {
 
     //Input system
-    public PlayerInput playerInputAction;
+    public PlayerAction playerInputAction;
     private Vector2 movementInput;
 
     //Animation
@@ -26,8 +26,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void Awake()
     {
-        //playerInputAction = new PlayerAction();
-        //playerInputAction.PlayerControls.Movement.performed += context => movementInput = context.ReadValue<Vector2>();
+        playerInputAction = new PlayerAction();
+        playerInputAction.PlayerControls.Movement.performed += context => movementInput = context.ReadValue<Vector2>();
         anim = GetComponent<Animator>();
 
     }
@@ -124,10 +124,11 @@ public class PlayerMovement : MonoBehaviour
     // Enable and Disable Input Ation
     private void OnEnable()
     {
-        //playerInputAction.Enable();
+        playerInputAction.Enable();
+
     }
     private void OnDisable()
     {
-        //playerInputAction.Disable();
+        playerInputAction.Disable();
     }
 }
