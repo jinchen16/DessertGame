@@ -4,6 +4,9 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/_Scenes/Tests/Jin_tests.unity
+    guid: 491dc08a9bf0c934d9d2e099fe8e6573
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: bbad9c1c2d5c8de45b35ef6a73838a90, type: 2}

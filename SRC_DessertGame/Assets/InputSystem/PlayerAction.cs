@@ -53,6 +53,15 @@ public partial class @PlayerAction : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": ""Hold"",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Interact"",
+                    ""type"": ""Button"",
+                    ""id"": ""79192bb6-e8c5-49cb-9e4b-d0852828a861"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -169,7 +178,7 @@ public partial class @PlayerAction : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""9ca5f366-3284-4071-9d26-0b50d7fa3fa9"",
-                    ""path"": ""<Keyboard>/e"",
+                    ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -187,6 +196,17 @@ public partial class @PlayerAction : IInputActionCollection2, IDisposable
                     ""action"": ""Run"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ec2cc48d-35ff-4526-a499-19289038112a"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -198,6 +218,7 @@ public partial class @PlayerAction : IInputActionCollection2, IDisposable
         m_PlayerControls_Movement = m_PlayerControls.FindAction("Movement", throwIfNotFound: true);
         m_PlayerControls_Dash = m_PlayerControls.FindAction("Dash", throwIfNotFound: true);
         m_PlayerControls_Run = m_PlayerControls.FindAction("Run", throwIfNotFound: true);
+        m_PlayerControls_Interact = m_PlayerControls.FindAction("Interact", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -260,6 +281,7 @@ public partial class @PlayerAction : IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerControls_Movement;
     private readonly InputAction m_PlayerControls_Dash;
     private readonly InputAction m_PlayerControls_Run;
+    private readonly InputAction m_PlayerControls_Interact;
     public struct PlayerControlsActions
     {
         private @PlayerAction m_Wrapper;
@@ -267,6 +289,7 @@ public partial class @PlayerAction : IInputActionCollection2, IDisposable
         public InputAction @Movement => m_Wrapper.m_PlayerControls_Movement;
         public InputAction @Dash => m_Wrapper.m_PlayerControls_Dash;
         public InputAction @Run => m_Wrapper.m_PlayerControls_Run;
+        public InputAction @Interact => m_Wrapper.m_PlayerControls_Interact;
         public InputActionMap Get() { return m_Wrapper.m_PlayerControls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -285,6 +308,9 @@ public partial class @PlayerAction : IInputActionCollection2, IDisposable
                 @Run.started -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnRun;
                 @Run.performed -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnRun;
                 @Run.canceled -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnRun;
+                @Interact.started -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnInteract;
+                @Interact.performed -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnInteract;
+                @Interact.canceled -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnInteract;
             }
             m_Wrapper.m_PlayerControlsActionsCallbackInterface = instance;
             if (instance != null)
@@ -298,6 +324,9 @@ public partial class @PlayerAction : IInputActionCollection2, IDisposable
                 @Run.started += instance.OnRun;
                 @Run.performed += instance.OnRun;
                 @Run.canceled += instance.OnRun;
+                @Interact.started += instance.OnInteract;
+                @Interact.performed += instance.OnInteract;
+                @Interact.canceled += instance.OnInteract;
             }
         }
     }
@@ -307,5 +336,6 @@ public partial class @PlayerAction : IInputActionCollection2, IDisposable
         void OnMovement(InputAction.CallbackContext context);
         void OnDash(InputAction.CallbackContext context);
         void OnRun(InputAction.CallbackContext context);
+        void OnInteract(InputAction.CallbackContext context);
     }
 }
