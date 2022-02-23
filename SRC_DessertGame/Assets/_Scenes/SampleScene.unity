@@ -3307,6 +3307,34 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8647249419358682320, guid: 28b9da1d859a8d64f9998c5931c42830, type: 3}
+      propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8647249419358682320, guid: 28b9da1d859a8d64f9998c5931c42830, type: 3}
+      propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8647249419358682320, guid: 28b9da1d859a8d64f9998c5931c42830, type: 3}
+      propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2138234419}
+    - target: {fileID: 8647249419358682320, guid: 28b9da1d859a8d64f9998c5931c42830, type: 3}
+      propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8647249419358682320, guid: 28b9da1d859a8d64f9998c5931c42830, type: 3}
+      propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnMove
+      objectReference: {fileID: 0}
+    - target: {fileID: 8647249419358682320, guid: 28b9da1d859a8d64f9998c5931c42830, type: 3}
+      propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PlayerMovement, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8647249419358682320, guid: 28b9da1d859a8d64f9998c5931c42830, type: 3}
+      propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 8883631623775037917, guid: 28b9da1d859a8d64f9998c5931c42830, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -3359,7 +3387,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 801171472, guid: 28b9da1d859a8d64f9998c5931c42830, type: 3}
+    - {fileID: 801171473, guid: 28b9da1d859a8d64f9998c5931c42830, type: 3}
+    - {fileID: 7283590722312616557, guid: 28b9da1d859a8d64f9998c5931c42830, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 28b9da1d859a8d64f9998c5931c42830, type: 3}
 --- !u!1 &2138234408 stripped
 GameObject:
@@ -3380,84 +3411,6 @@ CapsuleCollider:
   m_Height: 0.91
   m_Direction: 1
   m_Center: {x: 0, y: 0.47, z: 0}
---- !u!114 &2138234410
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2138234408}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: 3a2828443cd1b4447b61a4aef18daa17, type: 3}
-  m_NotificationBehavior: 2
-  m_UIInputModule: {fileID: 0}
-  m_DeviceLostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_DeviceRegainedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ControlsChangedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ActionEvents:
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2138234411}
-        m_TargetAssemblyTypeName: PlayerController, NewAssembly
-        m_MethodName: OnMovement
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: ee853421-6bed-4a14-bf03-866388437958
-    m_ActionName: PlayerControls/Movement[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d,/Keyboard/upArrow,/Keyboard/downArrow,/Keyboard/leftArrow,/Keyboard/rightArrow]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: bf5b3df9-7552-4b40-90bb-aa4f919c5801
-    m_ActionName: PlayerControls/Dash[/Keyboard/e]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2138234411}
-        m_TargetAssemblyTypeName: PlayerController, NewAssembly
-        m_MethodName: OnRun
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 11459104-6280-4330-bffa-23b067c838ec
-    m_ActionName: PlayerControls/Run[/Keyboard/leftShift]
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
-  m_DefaultActionMap: PlayerControls
-  m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
---- !u!114 &2138234411
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2138234408}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 257cd7da9c2e6b94c82681f2ae3833da, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!54 &2138234412
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3493,3 +3446,14 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &2138234419 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4098741478270972892, guid: 28b9da1d859a8d64f9998c5931c42830, type: 3}
+  m_PrefabInstance: {fileID: 2138234407}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2138234408}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97b307d633d0d1543a0017fb26b1942a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
