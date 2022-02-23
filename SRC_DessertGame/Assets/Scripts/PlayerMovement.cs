@@ -14,21 +14,31 @@ public class PlayerMovement : MonoBehaviour
     private Animator anim;
 
     [SerializeField] private float movementSpeed = 0.0f;
-    [SerializeField] private float walkSpeed = .0f;
-    [SerializeField] private float runSpeed = 20.0f;
+    [SerializeField] private float walkSpeed = 1.0f;
+    [SerializeField] private float runSpeed = 5.0f;
     [SerializeField] private bool IsRunning = false;
+    [SerializeField] private bool IsWalking = false;
+    [SerializeField] private bool IsMoving = false;
+
 
     private Vector3 inputDir;
     private Vector3 moveVec;
     private Quaternion currentRotation;
 
-
+    //Test
+    private float speed = 0.0f;
+    private float accelation = 0.0f;
+    private float deccelation = 0.5f;
+    private int speedMesh;
 
     private void Awake()
     {
         playerInputAction = new PlayerAction();
         playerInputAction.PlayerControls.Movement.performed += context => movementInput = context.ReadValue<Vector2>();
         anim = GetComponent<Animator>();
+
+        //Test
+        speedMesh = Animator.StringToHash("Speed");
 
     }
 
@@ -50,8 +60,11 @@ public class PlayerMovement : MonoBehaviour
         // The calculation of direction the player wants to head
         Vector3 desireDir = camForward * inputDir.z + camRight * inputDir.x;
 
+
         Move(desireDir);
         Turn(desireDir);
+
+
     }
 
     void Move(Vector3 desireDirection)
@@ -64,13 +77,15 @@ public class PlayerMovement : MonoBehaviour
         {
             Run(desireDirection);
         }
-        else if (desireDirection == Vector3.zero)
+        else if (desireDirection == Vector3.zero && !IsRunning)
         {
             Idle();
         }
+
         moveVec.Set(desireDirection.x, 0f, desireDirection.z);
         moveVec = moveVec * movementSpeed * Time.deltaTime;
         transform.position += moveVec;
+
     }
 
     void Turn(Vector3 desireDirection)
@@ -90,23 +105,36 @@ public class PlayerMovement : MonoBehaviour
     void Idle()
     {
         anim.SetFloat("Speed", 0);
+        IsWalking = false;
+        IsRunning = false;
     }
     void Walk(Vector3 desireDirection)
     {
+        IsWalking = true;
         movementSpeed = walkSpeed;
         anim.SetFloat("Speed", 0.5f);
-        //moveVec.Set(desireDirection.x, 0f, desireDirection.z);
-        //moveVec = moveVec * movementSpeed * Time.deltaTime;
-        //transform.position += moveVec;
+
     }
 
     void Run(Vector3 desireDirection)
     {
+
         movementSpeed = runSpeed;
         anim.SetFloat("Speed", 1.0f);
-        //moveVec.Set(desireDirection.x, 0f, desireDirection.z);
-        //moveVec = moveVec * movementSpeed * Time.deltaTime;
-        //transform.position += moveVec;
+
+    }
+    public void OnMove(InputAction.CallbackContext value)
+    {
+        if (value.performed)
+        {
+            IsMoving = true;
+            Debug.Log("Move Move Move");
+        }
+        else
+        {
+            IsMoving = false;
+            Debug.Log("Stop.....");
+        }
     }
     public void OnRun(InputAction.CallbackContext value)
     {
