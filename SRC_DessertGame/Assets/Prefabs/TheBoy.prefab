@@ -1250,7 +1250,6 @@ GameObject:
   - component: {fileID: 801171476}
   - component: {fileID: 801171475}
   - component: {fileID: 801171474}
-  - component: {fileID: 801171472}
   - component: {fileID: 801171473}
   - component: {fileID: 7283590722312616557}
   m_Layer: 0
@@ -1307,6 +1306,8 @@ MonoBehaviour:
   walkSpeed: 5
   runSpeed: 20
   IsRunning: 0
+  IsWalking: 0
+  IsMoving: 0
 --- !u!114 &8647249419358682320
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1414,18 +1415,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &801171472
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8883631623775335933}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 257cd7da9c2e6b94c82681f2ae3833da, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &801171473
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1453,7 +1442,7 @@ MonoBehaviour:
   m_ActionEvents:
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 801171472}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: PlayerController, NewAssembly
         m_MethodName: OnMovement
         m_Mode: 0
@@ -1473,7 +1462,7 @@ MonoBehaviour:
     m_ActionName: PlayerControls/Dash[/Keyboard/e]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 801171472}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: PlayerController, NewAssembly
         m_MethodName: OnRun
         m_Mode: 0
@@ -1488,7 +1477,19 @@ MonoBehaviour:
     m_ActionId: 11459104-6280-4330-bffa-23b067c838ec
     m_ActionName: PlayerControls/Run[/Keyboard/leftShift]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7283590722312616557}
+        m_TargetAssemblyTypeName: PlayerActionController, Assembly-CSharp
+        m_MethodName: OnInteract
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 79192bb6-e8c5-49cb-9e4b-d0852828a861
     m_ActionName: PlayerControls/Interact[/Keyboard/e]
   m_NeverAutoSwitchControlSchemes: 0
