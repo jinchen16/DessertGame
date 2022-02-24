@@ -25,20 +25,12 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 moveVec;
     private Quaternion currentRotation;
 
-    //Test
-    private float speed = 0.0f;
-    private float accelation = 0.0f;
-    private float deccelation = 0.5f;
-    private int speedMesh;
 
     private void Awake()
     {
         playerInputAction = new PlayerAction();
         playerInputAction.PlayerControls.Movement.performed += context => movementInput = context.ReadValue<Vector2>();
         anim = GetComponent<Animator>();
-
-        //Test
-        speedMesh = Animator.StringToHash("Speed");
 
     }
 
@@ -60,10 +52,11 @@ public class PlayerMovement : MonoBehaviour
         // The calculation of direction the player wants to head
         Vector3 desireDir = camForward * inputDir.z + camRight * inputDir.x;
 
-
-        Move(desireDir);
-        Turn(desireDir);
-
+        if (IsMoving)
+        {
+            Move(desireDir); 
+            Turn(desireDir);
+        }
 
     }
 
@@ -77,9 +70,10 @@ public class PlayerMovement : MonoBehaviour
         {
             Run(desireDirection);
         }
-        else if (desireDirection == Vector3.zero && !IsRunning)
+        else if (desireDirection == Vector3.zero)
         {
             Idle();
+
         }
 
         moveVec.Set(desireDirection.x, 0f, desireDirection.z);
@@ -105,12 +99,16 @@ public class PlayerMovement : MonoBehaviour
     void Idle()
     {
         anim.SetFloat("Speed", 0);
-        IsWalking = false;
         IsRunning = false;
+        IsWalking = false;
+        IsMoving = false;
     }
     void Walk(Vector3 desireDirection)
     {
         IsWalking = true;
+        IsRunning = false;
+        IsMoving = true;
+
         movementSpeed = walkSpeed;
         anim.SetFloat("Speed", 0.5f);
 
@@ -118,6 +116,9 @@ public class PlayerMovement : MonoBehaviour
 
     void Run(Vector3 desireDirection)
     {
+        IsRunning = true;
+        IsWalking = false;
+        IsMoving = true;
 
         movementSpeed = runSpeed;
         anim.SetFloat("Speed", 1.0f);
@@ -132,7 +133,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            IsMoving = false;
+            Idle();
             Debug.Log("Stop.....");
         }
     }
