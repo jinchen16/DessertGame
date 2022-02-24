@@ -29,6 +29,8 @@ public class Recipe : MonoBehaviour
         {
             showRecipe = !showRecipe;
             recipe.SetActive(showRecipe);
+            //if (Time.timeScale == 0) Time.timeScale = 1;
+            //if (Time.timeScale == 1) Time.timeScale = 0;
         }
     }
 }
