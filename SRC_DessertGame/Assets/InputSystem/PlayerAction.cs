@@ -29,7 +29,7 @@ public partial class @PlayerAction : IInputActionCollection2, IDisposable
             ""actions"": [
                 {
                     ""name"": ""Movement"",
-                    ""type"": ""PassThrough"",
+                    ""type"": ""Value"",
                     ""id"": ""ee853421-6bed-4a14-bf03-866388437958"",
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
@@ -42,17 +42,8 @@ public partial class @PlayerAction : IInputActionCollection2, IDisposable
                     ""id"": ""bf5b3df9-7552-4b40-90bb-aa4f919c5801"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Run"",
-                    ""type"": ""Button"",
-                    ""id"": ""11459104-6280-4330-bffa-23b067c838ec"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": ""Hold"",
-                    ""initialStateCheck"": false
+                    ""interactions"": ""Press"",
+                    ""initialStateCheck"": true
                 },
                 {
                     ""name"": ""Interact"",
@@ -188,17 +179,6 @@ public partial class @PlayerAction : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""383ec54a-93c0-402a-8f17-eb3f3c22ed55"",
-                    ""path"": ""<Keyboard>/leftShift"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Run"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""ec2cc48d-35ff-4526-a499-19289038112a"",
                     ""path"": ""<Keyboard>/e"",
                     ""interactions"": """",
@@ -217,7 +197,6 @@ public partial class @PlayerAction : IInputActionCollection2, IDisposable
         m_PlayerControls = asset.FindActionMap("PlayerControls", throwIfNotFound: true);
         m_PlayerControls_Movement = m_PlayerControls.FindAction("Movement", throwIfNotFound: true);
         m_PlayerControls_Dash = m_PlayerControls.FindAction("Dash", throwIfNotFound: true);
-        m_PlayerControls_Run = m_PlayerControls.FindAction("Run", throwIfNotFound: true);
         m_PlayerControls_Interact = m_PlayerControls.FindAction("Interact", throwIfNotFound: true);
     }
 
@@ -280,7 +259,6 @@ public partial class @PlayerAction : IInputActionCollection2, IDisposable
     private IPlayerControlsActions m_PlayerControlsActionsCallbackInterface;
     private readonly InputAction m_PlayerControls_Movement;
     private readonly InputAction m_PlayerControls_Dash;
-    private readonly InputAction m_PlayerControls_Run;
     private readonly InputAction m_PlayerControls_Interact;
     public struct PlayerControlsActions
     {
@@ -288,7 +266,6 @@ public partial class @PlayerAction : IInputActionCollection2, IDisposable
         public PlayerControlsActions(@PlayerAction wrapper) { m_Wrapper = wrapper; }
         public InputAction @Movement => m_Wrapper.m_PlayerControls_Movement;
         public InputAction @Dash => m_Wrapper.m_PlayerControls_Dash;
-        public InputAction @Run => m_Wrapper.m_PlayerControls_Run;
         public InputAction @Interact => m_Wrapper.m_PlayerControls_Interact;
         public InputActionMap Get() { return m_Wrapper.m_PlayerControls; }
         public void Enable() { Get().Enable(); }
@@ -305,9 +282,6 @@ public partial class @PlayerAction : IInputActionCollection2, IDisposable
                 @Dash.started -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnDash;
                 @Dash.performed -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnDash;
                 @Dash.canceled -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnDash;
-                @Run.started -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnRun;
-                @Run.performed -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnRun;
-                @Run.canceled -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnRun;
                 @Interact.started -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnInteract;
                 @Interact.performed -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnInteract;
                 @Interact.canceled -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnInteract;
@@ -321,9 +295,6 @@ public partial class @PlayerAction : IInputActionCollection2, IDisposable
                 @Dash.started += instance.OnDash;
                 @Dash.performed += instance.OnDash;
                 @Dash.canceled += instance.OnDash;
-                @Run.started += instance.OnRun;
-                @Run.performed += instance.OnRun;
-                @Run.canceled += instance.OnRun;
                 @Interact.started += instance.OnInteract;
                 @Interact.performed += instance.OnInteract;
                 @Interact.canceled += instance.OnInteract;
@@ -335,7 +306,6 @@ public partial class @PlayerAction : IInputActionCollection2, IDisposable
     {
         void OnMovement(InputAction.CallbackContext context);
         void OnDash(InputAction.CallbackContext context);
-        void OnRun(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
     }
 }

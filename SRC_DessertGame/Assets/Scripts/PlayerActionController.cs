@@ -8,12 +8,6 @@ public class PlayerActionController : MonoBehaviour
 {
     private UnityAction _onInteractCallback;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     public void OnInteract(InputAction.CallbackContext context)
     {
         if (context.performed)
