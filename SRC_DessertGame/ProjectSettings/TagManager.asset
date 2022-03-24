@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ingredient
+  - Deliver
+  - Mixer
+  - Oven
   layers:
   - Default
   - TransparentFX

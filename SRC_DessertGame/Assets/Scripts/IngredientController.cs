@@ -5,12 +5,13 @@ using UnityEngine;
 public enum State
 {
     NORMAL,
-    CHOPPING,
-    CHOPPED
+    PROCESSING,
+    PROCESSED
 }
 
 public class IngredientController : MonoBehaviour
 {
+    [SerializeField]
     private State _currentState;
     private State _previousState;
 
@@ -23,18 +24,52 @@ public class IngredientController : MonoBehaviour
     [SerializeField]
     private Transform _target;
 
+    [SerializeField]
+    private GameObject _rawContainer;
+
+    [SerializeField]
+    private GameObject _processedContainer;
+
+    private Transform _playerHolder;
+
+    [SerializeField]
+    private Rigidbody _rigidBody;
+    [SerializeField]
+    private Collider _collider;
+
+    [SerializeField]
+    private float _chopTime;
+
+
     public void SetCurrentState(State state)
     {
         _previousState = _currentState;
         _currentState = state;
 
         Debug.Log(">>>State " + state);
+        switch (state)
+        {
+            case State.NORMAL:
+                _rawContainer.SetActive(true);
+                _processedContainer.SetActive(false);
+                _rigidBody.isKinematic = false;
+                _collider.isTrigger = false;
+                break;
+            case State.PROCESSING:
+                break;
+            case State.PROCESSED:
+                _rawContainer.SetActive(false);
+                _processedContainer.SetActive(true);
+                break;
+            default:
+                break;
+        }
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        _choppingTime = 3f;
+        _choppingTime = _chopTime;
     }
 
     // Update is called once per frame
@@ -42,9 +77,9 @@ public class IngredientController : MonoBehaviour
     {
         if (_isChopping)
         {
-            _currentTime -= Time.deltaTime;            
+            _currentTime -= Time.deltaTime;
 
-            if(_actionLoading != null )
+            if (_actionLoading != null)
             {
                 float value = (_choppingTime - _currentTime) / _choppingTime;
                 _actionLoading.UpdateBar(value);
@@ -54,7 +89,7 @@ public class IngredientController : MonoBehaviour
             {
                 _isChopping = false;
                 _actionLoading.Hide();
-                SetCurrentState(State.CHOPPED);
+                SetCurrentState(State.PROCESSED);
             }
         }
     }
@@ -69,16 +104,39 @@ public class IngredientController : MonoBehaviour
 
             _currentTime = _choppingTime;
             _isChopping = true;
-            SetCurrentState(State.CHOPPING);
+            SetCurrentState(State.PROCESSING);
         }
-        else if (_currentState == State.CHOPPING)
+        else if (_currentState == State.PROCESSING)
         {
             _isChopping = true;
         }
+        else if (_currentState == State.PROCESSED)
+        {
+            if (_playerHolder != null)
+            {
+                _rigidBody.isKinematic = true;
+                _collider.isTrigger = true;
+                transform.parent = _playerHolder;
+                transform.localPosition = Vector3.zero;
+                transform.localRotation = Quaternion.identity;                
+            }
+        }
+    }
+
+    public void SetPlayerCarry(Transform parent)
+    {
+        _playerHolder = parent;
     }
 
     public void OnIngredientCanceled()
     {
         _isChopping = false;
+    }
+
+    public void OnIngredientReleased()
+    {
+        _rigidBody.isKinematic = false;
+        _collider.isTrigger = false;
+        transform.parent = null;
     }
 }

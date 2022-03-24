@@ -150,6 +150,14 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    public void OnDash(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            IsRunning = true;
+        }
+    }
+
     // Enable and Disable Input Ation
     private void OnEnable()
     {
