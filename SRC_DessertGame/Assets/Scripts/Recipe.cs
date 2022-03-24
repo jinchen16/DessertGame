@@ -5,7 +5,7 @@ using UnityEngine;
 public class Recipe : MonoBehaviour
 {//user story cam
     [SerializeField] private Transform cam;
-    [SerializeField] private Transform player;
+    [SerializeField] private Transform center;
     public Vector3 displacement = new Vector3(1, 14, -10);
     public Vector3 orientation = new Vector3(50, 0, 0);
     //user story recipe
@@ -15,8 +15,8 @@ public class Recipe : MonoBehaviour
     void Start()
     {
         cam = GameObject.FindGameObjectWithTag("MainCamera").transform;
-        player = GameObject.FindGameObjectWithTag("Player").transform;
-        cam.position = player.position + displacement;
+        center = GameObject.FindGameObjectWithTag("Center").transform;
+        cam.position = center.position + displacement;
         //cam.rotation = Quaternion.Euler(orientation);// 
         cam.eulerAngles = orientation;
         recipe.SetActive(showRecipe);
@@ -29,7 +29,7 @@ public class Recipe : MonoBehaviour
         {
             showRecipe = !showRecipe;
             recipe.SetActive(showRecipe);
-            //if (Time.timeScale == 0) Time.timeScale = 1;
+            //if (Time.timeScale == 0) Time.timeScale = 1; 
             //if (Time.timeScale == 1) Time.timeScale = 0;
         }
     }

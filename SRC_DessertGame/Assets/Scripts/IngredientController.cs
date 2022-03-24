@@ -90,6 +90,8 @@ public class IngredientController : MonoBehaviour
                 _isChopping = false;
                 _actionLoading.Hide();
                 SetCurrentState(State.PROCESSED);
+                //added line to play sfx
+                AudioManager.getInsta().Stop(AudioManager.SoundName.chopping);
             }
         }
     }
@@ -105,6 +107,8 @@ public class IngredientController : MonoBehaviour
             _currentTime = _choppingTime;
             _isChopping = true;
             SetCurrentState(State.PROCESSING);
+            //added line to play sfx
+            AudioManager.getInsta().Play(AudioManager.SoundName.chopping);
         }
         else if (_currentState == State.PROCESSING)
         {
@@ -131,6 +135,8 @@ public class IngredientController : MonoBehaviour
     public void OnIngredientCanceled()
     {
         _isChopping = false;
+        //added line to play sfx
+        AudioManager.getInsta().Stop(AudioManager.SoundName.chopping);
     }
 
     public void OnIngredientReleased()

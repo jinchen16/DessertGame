@@ -3,11 +3,7 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - Ingredient
-  - Deliver
-  - Mixer
-  - Oven
+  tags: []
   layers:
   - Default
   - TransparentFX
