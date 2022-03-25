@@ -39,7 +39,7 @@ public class MixerController : MonoBehaviour
         if (_isProcessing)
         {
             _currentTime -= Time.deltaTime;
-
+          
             if (_actionLoading != null)
             {
                 float value = (_processingTime - _currentTime) / _processingTime;
@@ -58,6 +58,11 @@ public class MixerController : MonoBehaviour
 
     public void PlaceIngredient()
     {
+        //added line to play sfx
+        if (AudioManager.getInsta() != null)
+        {
+            AudioManager.getInsta().Play(AudioManager.SoundName.mixing);
+        }
         if (_ingredientsQuantity >= _maxIngredients)
         {
             return;
@@ -94,5 +99,6 @@ public class MixerController : MonoBehaviour
         _bowlContainer.transform.parent = playerHolder;
         _bowlContainer.transform.localPosition = Vector3.zero;
         _bowlContainer.transform.localRotation = Quaternion.identity;
+
     }
 }

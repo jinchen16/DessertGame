@@ -43,6 +43,11 @@ public class OvenController : MonoBehaviour
                 _actionLoading.Hide();
                 _actionLoading = null;
                 _isDone = true;
+                //added line to play sfx
+                if (AudioManager.getInsta() != null)
+                {
+                    AudioManager.getInsta().Play(AudioManager.SoundName.ovenCooking);
+                }
             }
         }
     }
@@ -55,7 +60,9 @@ public class OvenController : MonoBehaviour
             cake.parent = playerHolder;
             cake.localPosition = Vector3.zero;
             cake.localRotation = Quaternion.identity;
-            playerActionController.SetHasItemOnHands(true);
+            playerActionController.SetHasItemOnHands(true);        
+
+
         }
         else
         {

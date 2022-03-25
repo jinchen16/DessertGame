@@ -8,6 +8,7 @@ public class AudioManager : MonoBehaviour//Script attached to an EmptyObject nam
         gametheme,
         menutheme,
         chopping,
+        ovenCooking,
         frying,
         mixing,
         victory,
