@@ -11,6 +11,9 @@ public class PoolHandler : Singleton<PoolHandler>
     [SerializeField]
     private GameObject _actionLoadingPrefab;
 
+    [SerializeField]
+    private GameObject _cakePrefab;
+
     public Transform SpawnActionLoading()
     {
         Transform element = EZ_PoolManager.Spawn(_actionLoadingPrefab.transform, Vector3.zero, Quaternion.identity);
@@ -19,7 +22,14 @@ public class PoolHandler : Singleton<PoolHandler>
         return element;
     }
 
-    public void DespawnActionLoading(Transform target)
+    public Transform SpawnCake()
+    {
+        Transform element = EZ_PoolManager.Spawn(_cakePrefab.transform, Vector3.zero, Quaternion.identity);
+        element.parent = _poolContainer;        
+        return element;
+    }
+
+    public void DespawnElement(Transform target)
     {
         EZ_PoolManager.Despawn(target);
     }

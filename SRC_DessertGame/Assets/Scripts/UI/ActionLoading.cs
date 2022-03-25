@@ -13,6 +13,7 @@ public class ActionLoading : MonoBehaviour
         Vector2 screenPoint = Camera.main.WorldToScreenPoint(targetPos);
         RectTransform rt = GetComponent<RectTransform>();
         rt.position = screenPoint;
+        UpdateBar(0);
     }
 
     public void UpdateBar(float value)
@@ -22,6 +23,6 @@ public class ActionLoading : MonoBehaviour
 
     public void Hide()
     {
-        PoolHandler.instance.DespawnActionLoading(this.transform);
+        PoolHandler.instance.DespawnElement(this.transform);
     }
 }

@@ -122,26 +122,35 @@ public class PlayerMovement : MonoBehaviour
 
         movementSpeed = runSpeed;
         anim.SetFloat("Speed", 1.0f);
-
+        
+        StartCoroutine(WaitRoutine());
     }
+
+    private IEnumerator WaitRoutine()
+    {
+        yield return new WaitForSeconds(0.15f);
+        IsRunning = false;
+        yield return null;
+    }
+
     public void OnMove(InputAction.CallbackContext value)
     {
         if (value.performed)
         {
             IsMoving = true;
-            Debug.Log("Move Move Move");
+            //Debug.Log("Move Move Move");
         }
         else
         {
             Idle();
-            Debug.Log("Stop.....");
+            //Debug.Log("Stop.....");
         }
     }
     public void OnRun(InputAction.CallbackContext value)
     {
         if (value.performed)
         {
-            Debug.Log("Running");
+            //Debug.Log("Running");
             IsRunning = true;
         }
         else

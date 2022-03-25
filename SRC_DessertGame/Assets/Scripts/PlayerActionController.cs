@@ -8,6 +8,8 @@ public class PlayerActionController : MonoBehaviour
 {
     private UnityAction _onInteractCallback;
 
+    public bool HasItemOnHands { get; private set; }    
+
     public void OnInteract(InputAction.CallbackContext context)
     {
         if (context.performed)
@@ -15,6 +17,8 @@ public class PlayerActionController : MonoBehaviour
             _onInteractCallback?.Invoke();
         }        
     }
+
+    public void SetHasItemOnHands(bool hasItemOnHands) => HasItemOnHands = hasItemOnHands;
 
     public void SetOnInteractCallback(UnityAction onInteractCallback = null) => _onInteractCallback = onInteractCallback;
 }

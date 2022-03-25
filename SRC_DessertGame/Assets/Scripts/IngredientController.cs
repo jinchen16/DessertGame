@@ -15,8 +15,8 @@ public class IngredientController : MonoBehaviour
     private State _currentState;
     private State _previousState;
 
-    private bool _isChopping;
-    private float _choppingTime;
+    private bool _isProcessing;
+    private float _processingTime;
     private float _currentTime;
 
     private ActionLoading _actionLoading;
@@ -38,7 +38,7 @@ public class IngredientController : MonoBehaviour
     private Collider _collider;
 
     [SerializeField]
-    private float _chopTime;
+    private float _processTimeDeclared;
 
 
     public void SetCurrentState(State state)
@@ -69,34 +69,38 @@ public class IngredientController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _choppingTime = _chopTime;
+        _processingTime = _processTimeDeclared;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (_isChopping)
+        if (_isProcessing)
         {
             _currentTime -= Time.deltaTime;
 
             if (_actionLoading != null)
             {
-                float value = (_choppingTime - _currentTime) / _choppingTime;
+                float value = (_processingTime - _currentTime) / _processingTime;
                 _actionLoading.UpdateBar(value);
             }
 
             if (_currentTime <= 0)
             {
-                _isChopping = false;
+                _isProcessing = false;
                 _actionLoading.Hide();
+                _actionLoading = null;
                 SetCurrentState(State.PROCESSED);
                 //added line to play sfx
-                AudioManager.getInsta().Stop(AudioManager.SoundName.chopping);
+                if (AudioManager.getInsta() != null)
+                {
+                    AudioManager.getInsta().Stop(AudioManager.SoundName.chopping);
+                }
             }
         }
     }
 
-    public void OnIngredientInteracted()
+    public void OnIngredientInteracted(Transform playerHolder = null, PlayerActionController playerActionController = null)
     {
         if (_currentState == State.NORMAL)
         {
@@ -104,25 +108,32 @@ public class IngredientController : MonoBehaviour
             _actionLoading = actionLoadingT.GetComponent<ActionLoading>();
             _actionLoading.SetPosition(_target.position);
 
-            _currentTime = _choppingTime;
-            _isChopping = true;
+            _currentTime = _processingTime;
+            _isProcessing = true;
             SetCurrentState(State.PROCESSING);
             //added line to play sfx
-            AudioManager.getInsta().Play(AudioManager.SoundName.chopping);
+            if (AudioManager.getInsta() != null)
+            {
+                AudioManager.getInsta().Play(AudioManager.SoundName.chopping);
+            }
         }
         else if (_currentState == State.PROCESSING)
         {
-            _isChopping = true;
+            _isProcessing = true;
         }
         else if (_currentState == State.PROCESSED)
         {
-            if (_playerHolder != null)
+            if (playerHolder != null)
             {
+                if (playerActionController != null)
+                {
+                    playerActionController.SetHasItemOnHands(true);
+                }
                 _rigidBody.isKinematic = true;
                 _collider.isTrigger = true;
-                transform.parent = _playerHolder;
+                transform.parent = playerHolder;
                 transform.localPosition = Vector3.zero;
-                transform.localRotation = Quaternion.identity;                
+                transform.localRotation = Quaternion.identity;
             }
         }
     }
@@ -134,9 +145,12 @@ public class IngredientController : MonoBehaviour
 
     public void OnIngredientCanceled()
     {
-        _isChopping = false;
         //added line to play sfx
-        AudioManager.getInsta().Stop(AudioManager.SoundName.chopping);
+        if (AudioManager.getInsta() != null)
+        {
+            AudioManager.getInsta().Stop(AudioManager.SoundName.chopping);
+        }
+        _isProcessing = false;
     }
 
     public void OnIngredientReleased()
