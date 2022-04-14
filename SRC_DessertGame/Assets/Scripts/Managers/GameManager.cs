@@ -6,16 +6,23 @@ public class GameManager : Singleton<GameManager>
 {
     TimerManager timerManager;
 
+    //Haewon
+    public static bool IsTimeup = false;
+
     protected override void Awake()
     {
         base.Awake();
 
-        timerManager = new TimerManager(120);
+        timerManager = new TimerManager(10);
         timerManager.SetIsRunning(true);        
     }
 
     private void Start()
     {
+        //Haewon
+        timerManager.Timeup = false;
+        IsTimeup = timerManager.Timeup;
+
         TimerPanelManager.instance.SetTimerText(timerManager.ToString());
     }
 
@@ -25,6 +32,13 @@ public class GameManager : Singleton<GameManager>
         {
             timerManager.UpdateTotalTime(Time.deltaTime);
             TimerPanelManager.instance.SetTimerText(timerManager.ToString());
+        }
+
+        //Haewon
+        if (timerManager.Timeup)
+        {
+            IsTimeup = timerManager.Timeup;
+            Time.timeScale = 0f;
         }
     }
 }

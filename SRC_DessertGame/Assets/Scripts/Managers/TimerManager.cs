@@ -15,6 +15,9 @@ public class TimerManager
 
     public OnTimerCallback onTimerEndCallback;
 
+    //Haewon
+    public bool Timeup = false;
+
     public TimerManager(float totalTimeInSeconds)
     {
         SetTotalTimeInSeconds(totalTimeInSeconds);
@@ -31,6 +34,9 @@ public class TimerManager
 
         if (TotalTimeInSeconds <= 0)
         {
+            //Haewon
+            Timeup = true;
+            Debug.Log("Time up !!!!!");
             SetIsRunning(false);
             SetSeconds(0);
             SetMinutes(0);
