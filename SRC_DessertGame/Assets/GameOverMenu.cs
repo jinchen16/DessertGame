@@ -2,22 +2,39 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class GameOverMenu : MonoBehaviour
 {
     public GameObject GameOverMenuUI;
-    // Start is called before the first frame update
+    public GameObject CompletedMenuUI;
+
+    [SerializeField]
+    private TMP_Text _scoreText;
+
+// Start is called before the first frame update
     void Start()
     {
         GameOverMenuUI.SetActive(false);
     }
 
+
+    public void UpdateScoreText(int value)
+    {
+        _scoreText.text = value.ToString();
+    }
+
     // Update is called once per frame
     void Update()
     {
-        if (GameManager.IsTimeup)
+        if (GameManager.IsTimeup && !(ScoreManager.scoreCompleted))
         {
             GameOverMenuUI.SetActive(true);
+
+        }
+        if (ScoreManager.scoreCompleted && ScoreManager.scoreCompleted)
+        {
+            CompletedMenuUI.SetActive(true);
         }
     }
     public void MainMenu()
@@ -26,6 +43,7 @@ public class GameOverMenu : MonoBehaviour
     }
     public void Retry()
     {
-        SceneManager.LoadScene("Haewon_tests");
+
+        SceneManager.LoadScene("SampleScene");
     }
 }
