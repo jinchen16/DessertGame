@@ -14,5 +14,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Scenes/SampleScene.unity
     guid: e009b63982582f043910bbd023d7b19b
+  - enabled: 1
+    path: Assets/_Scenes/Tests/Haewon_tests.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: bbad9c1c2d5c8de45b35ef6a73838a90, type: 2}

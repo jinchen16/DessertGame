@@ -8,7 +8,7 @@ public class ScoreManager : Singleton<ScoreManager>
     //Haewon
     public GameOverMenu scoreGameOverMenu;
     public static bool scoreCompleted = false;
-    private int targetScore = 100;
+    private int targetScore = 200;
     public int Score { get; private set; }
 
     public void SetScore(int score)

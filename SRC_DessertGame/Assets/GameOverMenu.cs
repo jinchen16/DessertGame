@@ -16,6 +16,7 @@ public class GameOverMenu : MonoBehaviour
     void Start()
     {
         GameOverMenuUI.SetActive(false);
+        CompletedMenuUI.SetActive(false);
     }
 
 
@@ -32,7 +33,7 @@ public class GameOverMenu : MonoBehaviour
             GameOverMenuUI.SetActive(true);
 
         }
-        if (ScoreManager.scoreCompleted && ScoreManager.scoreCompleted)
+        if (ScoreManager.scoreCompleted)
         {
             CompletedMenuUI.SetActive(true);
         }
