@@ -13,8 +13,7 @@ public class GameManager : Singleton<GameManager>
     {
         base.Awake();
 
-        //timerManager = new TimerManager(10);
-        timerManager = new TimerManager(1200);
+        timerManager = new TimerManager(60);
         timerManager.SetIsRunning(true);        
     }
 
@@ -39,7 +38,7 @@ public class GameManager : Singleton<GameManager>
         if (timerManager.Timeup)
         {
             IsTimeup = timerManager.Timeup;
-            Time.timeScale = 0f;
+            Time.timeScale = 0f; // Not a good idea for future reference. It's annoying to keep track of the time scale value - Works in the meantime but it's better to control the pause/game over events with a boolean
         }
     }
 }

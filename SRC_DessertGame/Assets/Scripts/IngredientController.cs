@@ -64,6 +64,8 @@ public class IngredientController : MonoBehaviour
             case State.PROCESSED:
                 _rawContainer.SetActive(false);
                 _processedContainer.SetActive(true);
+                _rigidBody.isKinematic = false;
+                _collider.isTrigger = false;
                 break;
             default:
                 break;

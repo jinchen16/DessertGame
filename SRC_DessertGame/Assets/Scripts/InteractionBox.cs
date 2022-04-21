@@ -151,6 +151,22 @@ public class InteractionBox : MonoBehaviour
                 }
             });
         }
+
+        if (other.CompareTag("Bowl"))
+        {
+            _playerActionController.SetOnInteractCallback(() =>
+            {
+                if (!_playerActionController.HasItemOnHands)
+                {
+                    _playerActionController.SetHasItemOnHands(true);
+
+                    other.transform.parent = _playerHolder;
+                    other.transform.localPosition = Vector3.zero;
+                    other.transform.localRotation = Quaternion.identity;
+                    other.GetComponent<BowlController>().SetColliderStatus(true);
+                }
+            });
+        }
     }
 
     private void OnTriggerExit(Collider other)
