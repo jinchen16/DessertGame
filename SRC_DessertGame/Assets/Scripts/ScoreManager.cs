@@ -15,8 +15,13 @@ public class ScoreManager : Singleton<ScoreManager>
     {
         Score = score;
         scorePanelManager.UpdateScoreText(Score);
+        
         //Haewon
-        scoreGameOverMenu.UpdateScoreText(Score);
+        if (scoreGameOverMenu != null)
+        {
+            scoreGameOverMenu.UpdateScoreText(Score);
+        }
+
         CompletedScore(Score);
     }
 
@@ -29,12 +34,12 @@ public class ScoreManager : Singleton<ScoreManager>
         {
             Debug.Log("Reached the target ! ");
             return scoreCompleted = true;
-           
+
         }
         else
         {
             return scoreCompleted = false;
         }
-        
+
     }
 }

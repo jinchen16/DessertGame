@@ -9,6 +9,9 @@ TagManager:
   - Deliver
   - Oven
   - Center
+  - Bowl
+  - CutBoard
+  - IngredientSpawner
   layers:
   - Default
   - TransparentFX

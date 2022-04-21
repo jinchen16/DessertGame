@@ -40,6 +40,10 @@ public class IngredientController : MonoBehaviour
     [SerializeField]
     private float _processTimeDeclared;
 
+    public bool IsOnCutboard { get; private set; }
+
+    public State CurrentState { get { return _currentState; } }
+
 
     public void SetCurrentState(State state)
     {
@@ -70,6 +74,7 @@ public class IngredientController : MonoBehaviour
     void Start()
     {
         _processingTime = _processTimeDeclared;
+        IsOnCutboard = false;
     }
 
     // Update is called once per frame
@@ -104,6 +109,13 @@ public class IngredientController : MonoBehaviour
     {
         if (_currentState == State.NORMAL)
         {
+            if (!IsOnCutboard)
+            {
+                CarryIngredient(playerHolder, playerActionController);
+
+                return;
+            }
+
             Transform actionLoadingT = PoolHandler.instance.SpawnActionLoading();
             _actionLoading = actionLoadingT.GetComponent<ActionLoading>();
             _actionLoading.SetPosition(_target.position);
@@ -123,18 +135,7 @@ public class IngredientController : MonoBehaviour
         }
         else if (_currentState == State.PROCESSED)
         {
-            if (playerHolder != null)
-            {
-                if (playerActionController != null)
-                {
-                    playerActionController.SetHasItemOnHands(true);
-                }
-                _rigidBody.isKinematic = true;
-                _collider.isTrigger = true;
-                transform.parent = playerHolder;
-                transform.localPosition = Vector3.zero;
-                transform.localRotation = Quaternion.identity;
-            }
+            CarryIngredient(playerHolder, playerActionController);
         }
     }
 
@@ -158,5 +159,38 @@ public class IngredientController : MonoBehaviour
         _rigidBody.isKinematic = false;
         _collider.isTrigger = false;
         transform.parent = null;
+    }
+
+    public void CarryIngredient(Transform playerHolder = null, PlayerActionController playerActionController = null)
+    {
+        if (playerHolder != null)
+        {
+            if (playerActionController != null)
+            {
+                playerActionController.SetHasItemOnHands(true);
+            }
+
+            _rigidBody.isKinematic = true;
+            _collider.isTrigger = true;
+            transform.parent = playerHolder;
+            transform.localPosition = Vector3.zero;
+            transform.localRotation = Quaternion.identity;
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("CutBoard"))
+        {
+            IsOnCutboard = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("CutBoard"))
+        {
+            IsOnCutboard = false;
+        }
     }
 }

@@ -30,7 +30,6 @@ public class InteractionBox : MonoBehaviour
 
                 ingredientController.OnIngredientInteracted(_playerHolder, _playerActionController);
             });
-            //Debug.Log(">>>Touching ingredient");
         }
         else if (other.CompareTag("Deliver"))
         {
@@ -55,9 +54,22 @@ public class InteractionBox : MonoBehaviour
                     if (_playerActionController.HasItemOnHands)
                     {
                         MixerController mixer = other.GetComponent<MixerController>();
-                        mixer.PlaceIngredient();
-                        _playerActionController.SetHasItemOnHands(false);
-                        Destroy(_playerHolder.GetChild(0).gameObject);
+                        BowlController bowl = _playerHolder.GetChild(0).GetComponent<BowlController>();
+                        if (bowl)
+                        {
+                            _playerHolder.GetChild(0).transform.parent = mixer.transform;
+                            bowl.ResetPosition();
+                            _playerActionController.SetHasItemOnHands(false);
+                        }
+                        else
+                        {
+                            if (_playerHolder.GetChild(0).GetComponent<IngredientController>().CurrentState == State.PROCESSED)
+                            {
+                                mixer.PlaceIngredient();
+                                _playerActionController.SetHasItemOnHands(false);
+                                PoolHandler.instance.DespawnElement(_playerHolder.GetChild(0).gameObject.transform);
+                            }
+                        }
                     }
                 });
                 //Debug.Log(">>>Mixer");
@@ -81,6 +93,7 @@ public class InteractionBox : MonoBehaviour
             _playerActionController.SetOnInteractCallback(() =>
             {
                 OvenController oven = other.GetComponent<OvenController>();
+
                 if (!oven.IsDone())
                 {
                     if (_playerHolder.childCount > 0)
@@ -88,14 +101,53 @@ public class InteractionBox : MonoBehaviour
                         BowlController bowl = _playerHolder.GetChild(0).GetComponent<BowlController>();
                         if (bowl != null)
                         {
-                            bowl.transform.parent = null;
+                            //bowl.transform.parent = null;
                             oven.PlaceBowl();
                         }
                     }
                 }
                 else
                 {
+                    if (_playerActionController.HasItemOnHands)
+                    {
+                        _playerHolder.GetChild(0).transform.parent = null;
+                    }
+
                     oven.TakeCake(_playerHolder, _playerActionController);
+                }
+            });
+        }
+        else if (other.CompareTag("IngredientSpawner"))
+        {
+            _playerActionController.SetOnInteractCallback(() =>
+            {
+                if (_playerActionController.HasItemOnHands)
+                {
+                    IngredientController tmp = _playerHolder.GetChild(0).GetComponent<IngredientController>();
+                    if (tmp != null)
+                    {
+                        tmp.OnIngredientReleased();
+                        _playerActionController.SetHasItemOnHands(false);
+                    }
+                }
+                other.GetComponent<IngredientSpawner>().SpawnIngredient(_playerHolder, _playerActionController);
+            });
+        }
+        else if (other.CompareTag("CutBoard"))
+        {
+            _playerActionController.SetOnInteractCallback(() =>
+            {
+                if (_playerActionController.HasItemOnHands)
+                {
+                    IngredientController tmp = _playerHolder.GetChild(0).GetComponent<IngredientController>();
+                    if (tmp != null && tmp.CurrentState == State.NORMAL)
+                    {
+                        tmp.OnIngredientReleased();
+                        tmp.transform.parent = other.transform;
+                        tmp.transform.localPosition = other.transform.Find("Positioner").localPosition;
+                        tmp.transform.rotation = Quaternion.identity;
+                        _playerActionController.SetHasItemOnHands(false);
+                    }
                 }
             });
         }

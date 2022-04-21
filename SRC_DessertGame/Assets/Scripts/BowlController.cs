@@ -4,15 +4,24 @@ using UnityEngine;
 
 public class BowlController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField]
+    private BoxCollider _collider;
+
+    [SerializeField]
+    private Vector3 _startPos;
+
+    private void Start()
     {
-        
+        _startPos = transform.localPosition;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void SetColliderStatus(bool status)
     {
-        
+        _collider.enabled = status;
+    }
+
+    public void ResetPosition()
+    {
+        transform.localPosition = _startPos;
     }
 }

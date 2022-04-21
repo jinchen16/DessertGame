@@ -13,7 +13,8 @@ public class GameManager : Singleton<GameManager>
     {
         base.Awake();
 
-        timerManager = new TimerManager(30);
+        //timerManager = new TimerManager(10);
+        timerManager = new TimerManager(1200);
         timerManager.SetIsRunning(true);        
     }
 

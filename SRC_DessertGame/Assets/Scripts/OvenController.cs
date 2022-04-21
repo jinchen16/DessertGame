@@ -95,6 +95,7 @@ public class OvenController : MonoBehaviour
 
     public void TakeCake(Transform playerHolder, PlayerActionController playerActionController)
     {
+        _isDone = false;
         Transform cake = PoolHandler.instance.SpawnCake();
         cake.parent = playerHolder;
         cake.localPosition = Vector3.zero;

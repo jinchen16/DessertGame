@@ -24,13 +24,15 @@ public class MixerController : MonoBehaviour
     private int _maxIngredients;
 
     [SerializeField]
-    private GameObject _bowlContainer;
+    private GameObject _bowlContainer;    
 
     // Start is called before the first frame update
     void Start()
     {
         _processingTime = _processTimeDeclared;
         _isDone = false;
+
+        _bowlContainer.GetComponent<BowlController>().SetColliderStatus(false);
     }
 
     // Update is called once per frame
@@ -99,6 +101,12 @@ public class MixerController : MonoBehaviour
         _bowlContainer.transform.parent = playerHolder;
         _bowlContainer.transform.localPosition = Vector3.zero;
         _bowlContainer.transform.localRotation = Quaternion.identity;
+        _bowlContainer.GetComponent<BowlController>().SetColliderStatus(true);
+    }
 
+    public void ResetMixer()
+    {
+        _isDone = false;
+        _ingredientsQuantity = 0;
     }
 }
